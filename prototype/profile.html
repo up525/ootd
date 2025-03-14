@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #333;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-bar {
+            height: 50px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            height: 100%;
+            color: #999;
+        }
+        
+        .tab-item.active {
+            color: #3B82F6;
+        }
+        
+        .profile-header {
+            background: linear-gradient(to right, #3B82F6, #60A5FA);
+            border-radius: 0 0 30px 30px;
+            padding: 30px 20px;
+            color: white;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-avatar i {
+            font-size: 40px;
+            color: #3B82F6;
+        }
+        
+        .profile-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .profile-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+        
+        .profile-item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #3B82F6;
+        }
+        
+        .edit-btn {
+            padding: 6px 12px;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3B82F6;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="text-sm font-medium">我的</div>
+    </div>
+    
+    <!-- 个人资料头部 -->
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="text-xl font-medium text-center">用户昵称</div>
+    </div>
+    
+    <!-- 内容区域 -->
+    <div class="p-4 pb-20">
+        <!-- 个人资料卡片 -->
+        <div class="profile-card">
+            <div class="text-base font-medium mb-2">个人资料</div>
+            
+            <div class="profile-item">
+                <div class="profile-item-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm text-gray-500">所在城市</div>
+                    <div class="font-medium">北京市</div>
+                </div>
+                <div class="edit-btn">修改</div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-item-icon">
+                    <i class="fas fa-venus-mars"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm text-gray-500">性别</div>
+                    <div class="font-medium">男生</div>
+                </div>
+                <div class="edit-btn">修改</div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-item-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm text-gray-500">个人描述</div>
+                    <div class="font-medium">喜欢简约、商务风格，平时经常需要参加正式场合，希望得到合适的穿搭建议。</div>
+                </div>
+                <div class="edit-btn">修改</div>
+            </div>
+        </div>
+        
+        <!-- 其他选项卡片 -->
+        <div class="profile-card">
+            <div class="profile-item">
+                <div class="profile-item-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium">历史记录</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-item-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium">我的收藏</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-item-icon">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="font-medium">设置</div>
+                </div>
+                <div class="text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar">
+        <div class="tab-item">
+            <i class="fas fa-tshirt text-lg"></i>
+            <div class="text-xs mt-1">OOTD</div>
+        </div>
+        <div class="tab-item active">
+            <i class="fas fa-user text-lg"></i>
+            <div class="text-xs mt-1">我的</div>
+        </div>
+    </div>
+    
+    <script>
+        // 底部标签切换
+        document.querySelectorAll('.tab-item').forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                if (index === 0) {
+                    window.parent.location.href = 'ootd.html';
+                }
+            });
+        });
+        
+        // 编辑按钮点击事件
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 在实际应用中可以打开编辑弹窗
+                alert('编辑功能将在正式版本中实现');
+            });
+        });
+    </script>
+</body>
+</html> 

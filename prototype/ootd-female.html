@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOTD - 女性版</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #333;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-bar {
+            height: 50px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            height: 100%;
+            color: #999;
+        }
+        
+        .tab-item.active {
+            color: #EC4899;
+        }
+        
+        .weather-card {
+            background: linear-gradient(to right, #EC4899, #F472B6);
+            color: white;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .forecast-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 8px 0;
+        }
+        
+        .forecast-day i {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .style-option {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 8px 16px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .style-option.selected {
+            background-color: #EC4899;
+            color: white;
+            border-color: #EC4899;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(to right, #EC4899, #F472B6);
+            color: white;
+            border-radius: 12px;
+            padding: 14px 0;
+            text-align: center;
+            font-weight: 500;
+            margin-top: 12px;
+            box-shadow: 0 4px 6px rgba(236, 72, 153, 0.2);
+            transition: all 0.2s;
+        }
+        
+        .generate-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(236, 72, 153, 0.2);
+        }
+        
+        .weather-icon {
+            font-size: 52px;
+            margin-right: 16px;
+        }
+        
+        .weather-temp {
+            font-size: 48px;
+            font-weight: 300;
+        }
+        
+        .weather-detail {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .card {
+            border-radius: 16px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="text-sm font-medium">OOTD</div>
+    </div>
+    
+    <!-- 内容区域 -->
+    <div class="p-4 pb-20">
+        <!-- 今日天气卡片 -->
+        <div class="card weather-card p-4 mb-4">
+            <div class="flex items-center justify-between mb-2">
+                <div class="text-sm opacity-90">北京市 · 今日</div>
+                <div class="text-sm opacity-90">12月21日 星期四</div>
+            </div>
+            
+            <div class="flex items-center mt-2">
+                <div class="weather-icon">
+                    <i class="fas fa-sun text-yellow-300"></i>
+                </div>
+                <div>
+                    <div class="weather-temp">-2°</div>
+                    <div class="weather-detail">晴朗 · 体感温度 -5°</div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-2 mt-4 text-sm">
+                <div class="flex flex-col items-center">
+                    <div class="opacity-90">湿度</div>
+                    <div class="font-medium mt-1">30%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="opacity-90">风速</div>
+                    <div class="font-medium mt-1">3 km/h</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="opacity-90">紫外线</div>
+                    <div class="font-medium mt-1">低</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 近7日天气卡片 -->
+        <div class="card p-4 mb-4">
+            <div class="text-base font-medium mb-4">近7日天气</div>
+            
+            <div class="flex justify-between">
+                <div class="forecast-day">
+                    <div class="text-sm">今天</div>
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <div class="text-sm font-medium">-2°</div>
+                    <div class="text-xs text-gray-500">-7°</div>
+                </div>
+                
+                <div class="forecast-day">
+                    <div class="text-sm">周五</div>
+                    <i class="fas fa-cloud text-gray-400"></i>
+                    <div class="text-sm font-medium">-1°</div>
+                    <div class="text-xs text-gray-500">-6°</div>
+                </div>
+                
+                <div class="forecast-day">
+                    <div class="text-sm">周六</div>
+                    <i class="fas fa-cloud-sun text-gray-500"></i>
+                    <div class="text-sm font-medium">0°</div>
+                    <div class="text-xs text-gray-500">-5°</div>
+                </div>
+                
+                <div class="forecast-day">
+                    <div class="text-sm">周日</div>
+                    <i class="fas fa-snowflake text-blue-300"></i>
+                    <div class="text-sm font-medium">-3°</div>
+                    <div class="text-xs text-gray-500">-8°</div>
+                </div>
+                
+                <div class="forecast-day">
+                    <div class="text-sm">周一</div>
+                    <i class="fas fa-snowflake text-blue-300"></i>
+                    <div class="text-sm font-medium">-4°</div>
+                    <div class="text-xs text-gray-500">-10°</div>
+                </div>
+                
+                <div class="forecast-day">
+                    <div class="text-sm">周二</div>
+                    <i class="fas fa-cloud text-gray-400"></i>
+                    <div class="text-sm font-medium">-2°</div>
+                    <div class="text-xs text-gray-500">-7°</div>
+                </div>
+                
+                <div class="forecast-day">
+                    <div class="text-sm">周三</div>
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <div class="text-sm font-medium">0°</div>
+                    <div class="text-xs text-gray-500">-5°</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 今日穿搭风格卡片 -->
+        <div class="card p-4">
+            <div class="text-base font-medium mb-4">今日穿搭风格</div>
+            
+            <div class="flex flex-wrap mb-4">
+                <div class="style-option">甜酷风</div>
+                <div class="style-option selected">温柔风</div>
+                <div class="style-option">学院风</div>
+                <div class="style-option">韩系简约风</div>
+                <div class="style-option">设计师品牌风</div>
+                <div class="style-option">复古文艺风</div>
+                <div class="style-option">小香风</div>
+                <div class="style-option">森女系</div>
+                <div class="style-option">运动休闲风</div>
+                <div class="style-option">Y2K风</div>
+            </div>
+            
+            <div class="generate-btn">
+                生成今日OOTD
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部标签栏 -->
+    <div class="tab-bar">
+        <div class="tab-item active">
+            <i class="fas fa-tshirt text-lg"></i>
+            <div class="text-xs mt-1">OOTD</div>
+        </div>
+        <div class="tab-item">
+            <i class="fas fa-user text-lg"></i>
+            <div class="text-xs mt-1">我的</div>
+        </div>
+    </div>
+    
+    <script>
+        // 添加穿搭风格选择功能
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.style-option').forEach(o => {
+                    o.classList.remove('selected');
+                });
+                option.classList.add('selected');
+            });
+        });
+        
+        // 生成OOTD按钮点击事件
+        document.querySelector('.generate-btn').addEventListener('click', () => {
+            window.parent.location.href = 'ootd-popup-female.html';
+        });
+        
+        // 底部标签切换
+        document.querySelectorAll('.tab-item').forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                if (index === 1) {
+                    window.parent.location.href = 'profile-female.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

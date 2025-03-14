@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOTD 生成弹窗</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #333;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .popup-container {
+            background-color: white;
+            border-radius: 24px 24px 0 0;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .popup-header {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .popup-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .popup-body {
+            padding: 20px;
+        }
+        
+        .weather-info {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .weather-icon {
+            font-size: 24px;
+            margin-right: 12px;
+            color: #4A90E2;
+        }
+        
+        .style-tag {
+            display: inline-block;
+            background-color: #EBF4FF;
+            color: #3B82F6;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .outfit-gallery {
+            margin: 20px 0;
+            position: relative;
+            height: 360px;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        
+        .outfit-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .outfit-slide.active {
+            opacity: 1;
+        }
+        
+        .slide-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #D1D5DB;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .indicator.active {
+            background-color: #3B82F6;
+            width: 24px;
+            border-radius: 4px;
+        }
+        
+        .advice-section {
+            background-color: #f8f9fa;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+        
+        .advice-heading {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #3B82F6;
+        }
+        
+        .action-btn {
+            display: block;
+            background: linear-gradient(to right, #3B82F6, #60A5FA);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 500;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏（透明） -->
+    <div class="status-bar"></div>
+    
+    <!-- 弹窗容器 -->
+    <div class="popup-container">
+        <div class="popup-header">
+            <div class="popup-title">今日穿搭建议</div>
+            <div class="close-btn" id="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="popup-body">
+            <!-- 天气信息 -->
+            <div class="weather-info">
+                <div class="weather-icon">
+                    <i class="fas fa-sun text-yellow-500"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-medium">今天 · 北京</div>
+                    <div class="text-xs text-gray-500">晴朗 · -2°C (体感温度 -5°C)</div>
+                </div>
+            </div>
+            
+            <!-- 风格标签 -->
+            <div>
+                <div class="font-medium mb-2">所选风格</div>
+                <div>
+                    <span class="style-tag">商务精英风</span>
+                </div>
+            </div>
+            
+            <!-- 穿搭图库（轮播） -->
+            <div class="outfit-gallery">
+                <div class="outfit-slide active" style="background-image: url('https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+                <div class="outfit-slide" style="background-image: url('https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+                <div class="outfit-slide" style="background-image: url('https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            </div>
+            
+            <!-- 轮播指示器 -->
+            <div class="slide-indicators">
+                <div class="indicator active" data-index="0"></div>
+                <div class="indicator" data-index="1"></div>
+                <div class="indicator" data-index="2"></div>
+            </div>
+            
+            <!-- AI穿搭建议 -->
+            <div class="advice-section">
+                <div class="advice-heading">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>AI穿搭建议
+                </div>
+                <div class="text-sm">
+                    <p>考虑到今天北京的低温天气（-2°C，体感温度-5°C）和您选择的商务精英风格，以下是推荐的穿搭方案：</p>
+                    <p class="font-medium mt-2">基础层：</p>
+                    <p>- 保暖内衣或轻薄的高领毛衣作为内搭</p>
+                    <p class="font-medium mt-2">中间层：</p>
+                    <p>- 深灰色或深蓝色的精致羊毛西装外套</p>
+                    <p>- 白色或浅蓝色的修身衬衫</p>
+                    <p>- 深色西裤（与外套搭配）</p>
+                    <p class="font-medium mt-2">外层：</p>
+                    <p>- 长款羊绒或羊毛大衣（黑色、海军蓝或深驼色）</p>
+                    <p class="font-medium mt-2">配饰：</p>
+                    <p>- 纯色羊绒围巾</p>
+                    <p>- 皮质手套</p>
+                    <p>- 商务皮鞋（最好加绒款）</p>
+                    <p class="font-medium mt-2">建议：</p>
+                    <p>- 今天温度较低，外出时请务必做好保暖措施</p>
+                    <p>- 商务场合建议携带公文包或手提电脑包，增添专业感</p>
+                </div>
+            </div>
+            
+            <!-- 行动按钮 -->
+            <a href="#" class="action-btn">收藏此穿搭</a>
+            <a href="ootd.html" class="action-btn bg-gray-200 text-gray-700 mt-3" style="box-shadow:none">返回首页</a>
+        </div>
+    </div>
+    
+    <script>
+        // 关闭按钮
+        document.getElementById('close-btn').addEventListener('click', () => {
+            window.parent.location.href = 'ootd.html';
+        });
+        
+        // 轮播功能
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.outfit-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        // 设置轮播间隔
+        setInterval(() => {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        }, 3000);
+        
+        // 点击指示器切换
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // 收藏按钮
+        document.querySelector('.action-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('穿搭已收藏！');
+        });
+    </script>
+</body>
+</html> 
