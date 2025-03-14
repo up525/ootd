@@ -3,60 +3,261 @@ page {
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
 }
 
-.userinfo {
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 导航栏样式 */
+.nav-title {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 17px;
+  font-weight: 500;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 44px;
+  line-height: 44px;
+  border-bottom: 1px solid #eee;
+}
+
+.content-area {
+  flex: 1;
+  padding-top: 44px; /* 导航栏高度 */
+  padding-bottom: 100rpx; /* 底部栏高度 */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* 通用样式 */
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-col, .flex-column {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-sm {
+  font-size: 28rpx;
+}
+
+.text-xs {
+  font-size: 24rpx;
+}
+
+.text-base {
+  font-size: 32rpx;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.mt-1 {
+  margin-top: 8rpx;
+}
+
+.mt-2 {
+  margin-top: 16rpx;
+}
+
+.mt-4 {
+  margin-top: 32rpx;
+}
+
+.mb-2 {
+  margin-bottom: 16rpx;
+}
+
+.mb-4 {
+  margin-bottom: 32rpx;
+}
+
+.p-4 {
+  padding: 32rpx;
+}
+
+.pb-20 {
+  padding-bottom: 160rpx;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-2 {
+  gap: 16rpx;
+}
+
+/* 底部标签栏 */
+.tabbar {
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #eee;
+  z-index: 100;
+}
+
+.tab-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #aaa;
-  width: 80%;
-}
-
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-.avatar-wrapper {
-  padding: 0;
-  width: 56px !important;
-  border-radius: 8px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
-}
-
-.nickname-wrapper {
-  display: flex;
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-top: .5px solid rgba(0, 0, 0, 0.1);
-  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
-  color: black;
-}
-
-.nickname-label {
-  width: 105px;
-}
-
-.nickname-input {
+  justify-content: center;
   flex: 1;
+  height: 100%;
+  color: #999;
+}
+
+.tab-item.active {
+  color: #3B82F6;
+}
+
+.tab-icon {
+  font-size: 40rpx;
+  margin-bottom: 4rpx;
+}
+
+.tab-text {
+  font-size: 24rpx;
+}
+
+/* 天气卡片 */
+.weather-card {
+  background: linear-gradient(to right, #4A90E2, #63B3ED);
+  color: white;
+  border-radius: 32rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 16rpx rgba(74, 144, 226, 0.2);
+}
+
+.weather-icon {
+  font-size: 104rpx;
+  margin-right: 32rpx;
+  line-height: 1;
+}
+
+.weather-temp {
+  font-size: 96rpx;
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.weather-detail {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+/* 卡片样式 */
+.card {
+  border-radius: 32rpx;
+  background-color: white;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-bottom: 32rpx;
+}
+
+/* 预报天气 */
+.forecast-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 16rpx 0;
+}
+
+.weather-day-icon {
+  font-size: 36rpx;
+  margin: 10rpx 0;
+}
+
+/* 穿搭风格选项 */
+.style-options {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 32rpx;
+}
+
+.style-option {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 24rpx;
+  padding: 16rpx 32rpx;
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.style-option.selected {
+  background-color: #3B82F6;
+  color: white;
+  border-color: #3B82F6;
+}
+
+/* 生成按钮 */
+.generate-btn {
+  background: linear-gradient(to right, #3B82F6, #60A5FA);
+  color: white;
+  border-radius: 24rpx;
+  padding: 28rpx 0;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 24rpx;
+  box-shadow: 0 8rpx 12rpx rgba(59, 130, 246, 0.2);
+  transition: all 0.2s;
 }

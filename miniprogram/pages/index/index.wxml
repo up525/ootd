@@ -1,27 +1,90 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
+<view class="container">
+  <!-- 导航栏 - 仅保留原型中那样的简单标题 -->
+  <view class="nav-title">
+    <text>OOTD</text>
+  </view>
+  
+  <!-- 内容区域 -->
+  <scroll-view scroll-y="true" class="content-area">
+    <view class="p-4 pb-20">
+      <!-- 今日天气卡片 -->
+      <view class="card weather-card p-4 mb-4">
+        <view class="flex items-center justify-between mb-2">
+          <view class="text-sm opacity-90">北京市 · 今日</view>
+          <view class="text-sm opacity-90">{{currentDate}}</view>
         </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+        
+        <view class="flex items-center mt-2">
+          <view class="weather-icon">
+            <text>☀️</text>
+          </view>
+          <view>
+            <view class="weather-temp">-2°</view>
+            <view class="weather-detail">晴朗 · 体感温度 -5°</view>
+          </view>
+        </view>
+        
+        <view class="grid grid-cols-3 gap-2 mt-4 text-sm">
+          <view class="flex flex-col items-center">
+            <view class="opacity-90">湿度</view>
+            <view class="font-medium mt-1">30%</view>
+          </view>
+          <view class="flex flex-col items-center">
+            <view class="opacity-90">风速</view>
+            <view class="font-medium mt-1">3 km/h</view>
+          </view>
+          <view class="flex flex-col items-center">
+            <view class="opacity-90">紫外线</view>
+            <view class="font-medium mt-1">低</view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 近7日天气卡片 -->
+      <view class="card p-4 mb-4">
+        <view class="text-base font-medium mb-4">近7日天气</view>
+        
+        <view class="forecast-container">
+          <block wx:for="{{weekForecast}}" wx:key="day">
+            <view class="forecast-day">
+              <view class="text-sm">{{item.day}}</view>
+              <text class="weather-day-icon">{{item.icon}}</text>
+              <view class="text-sm font-medium">{{item.high}}°</view>
+              <view class="text-xs text-gray-500">{{item.low}}°</view>
+            </view>
+          </block>
+        </view>
+      </view>
+      
+      <!-- 今日穿搭风格卡片 -->
+      <view class="card p-4">
+        <view class="text-base font-medium mb-4">今日穿搭风格</view>
+        
+        <view class="style-options">
+          <block wx:for="{{styleOptions}}" wx:key="name">
+            <view class="style-option {{item.selected ? 'selected' : ''}}" bindtap="selectStyle" data-index="{{index}}">
+              {{item.name}}
+            </view>
+          </block>
+        </view>
+        
+        <view class="generate-btn" style="transform: scale({{btnScale}})" bindtouchstart="btnTouchStart" bindtouchend="btnTouchEnd">
+          生成今日OOTD
+        </view>
+      </view>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+  </scroll-view>
+  
+  <!-- 底部标签栏 -->
+  <view class="tabbar">
+    <view class="tab-item active">
+      <text class="tab-icon">👔</text>
+      <view class="tab-text">OOTD</view>
+    </view>
+    <view class="tab-item" bindtap="navigateToProfile">
+      <text class="tab-icon">👤</text>
+      <view class="tab-text">我的</view>
     </view>
   </view>
-</scroll-view>
+</view>

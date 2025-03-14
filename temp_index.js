@@ -22,8 +22,7 @@ Page({
       { name: '复古文艺风', selected: false },
       { name: '极简主义风', selected: false },
       { name: '工装风', selected: false }
-    ],
-    btnScale: 1.0 // 用于按钮动画
+    ]
   },
   
   onLoad: function() {
@@ -56,28 +55,6 @@ Page({
     this.setData({
       styleOptions
     });
-    
-    // 添加选中效果的触觉反馈
-    if (wx.vibrateShort) {
-      wx.vibrateShort({
-        type: 'light'
-      });
-    }
-  },
-  
-  // 生成按钮按下动画
-  btnTouchStart: function() {
-    this.setData({
-      btnScale: 0.95
-    });
-  },
-  
-  // 生成按钮释放动画
-  btnTouchEnd: function() {
-    this.setData({
-      btnScale: 1.0
-    });
-    this.generateOOTD();
   },
   
   // 生成今日穿搭建议
@@ -88,15 +65,12 @@ Page({
       duration: 2000
     });
     
-    // 获取当前选中的风格
-    const selectedStyle = this.data.styleOptions.find(item => item.selected);
-    
     // 实际应用中，这里可以根据天气信息和选择的风格生成穿搭建议
     // 示例中只是一个简单的延迟弹窗
     setTimeout(() => {
       wx.showModal({
         title: '今日穿搭建议',
-        content: `根据当前天气状况和您选择的${selectedStyle.name}，建议您穿着保暖大衣、毛衣、长裤和皮鞋，搭配围巾增加保暖和时尚度。`,
+        content: '根据当前天气状况和您选择的风格，建议您穿着保暖大衣、毛衣、长裤和皮鞋，搭配围巾增加保暖和时尚度。',
         showCancel: false
       });
     }, 2000);

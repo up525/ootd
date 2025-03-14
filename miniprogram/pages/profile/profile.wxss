@@ -1,0 +1,213 @@
+/**profile.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 导航栏样式 - 简化为居中标题 */
+.nav-title {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 17px;
+  font-weight: 500;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 44px;
+  line-height: 44px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+/* 通用样式 */
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-sm {
+  font-size: 28rpx;
+}
+
+.text-xs {
+  font-size: 24rpx;
+}
+
+.text-base {
+  font-size: 32rpx;
+}
+
+.text-xl {
+  font-size: 40rpx;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 8rpx;
+}
+
+.mb-2 {
+  margin-bottom: 16rpx;
+}
+
+.p-4 {
+  padding: 32rpx;
+}
+
+.pb-20 {
+  padding-bottom: 160rpx;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+/* 个人资料头部 */
+.profile-header {
+  background: linear-gradient(to right, #3B82F6, #60A5FA);
+  border-radius: 0 0 60rpx 60rpx;
+  padding: 60rpx 40rpx;
+  color: white;
+  margin-top: 44px; /* 添加顶部边距，与导航栏高度一致 */
+}
+
+.profile-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.avatar-icon {
+  font-size: 80rpx;
+  color: #3B82F6;
+}
+
+/* 卡片样式 */
+.profile-card {
+  background-color: white;
+  border-radius: 32rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-item:last-child {
+  border-bottom: none;
+}
+
+.profile-item-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background-color: rgba(59, 130, 246, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  color: #3B82F6;
+  font-size: 36rpx;
+}
+
+.edit-btn {
+  padding: 12rpx 24rpx;
+  background-color: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+}
+
+.icon-right {
+  font-size: 28rpx;
+}
+
+/* 底部标签栏 */
+.tab-bar {
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #eee;
+  z-index: 100;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  color: #999;
+}
+
+.tab-item.active {
+  color: #3B82F6;
+}
+
+.icon {
+  font-size: 40rpx;
+  margin-bottom: 4rpx;
+} 

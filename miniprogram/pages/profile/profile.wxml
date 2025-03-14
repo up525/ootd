@@ -1,0 +1,107 @@
+<!--profile.wxml-->
+<view class="container">
+  <!-- 导航栏 - 简化为居中标题 -->
+  <view class="nav-title">
+    <text>我的</text>
+  </view>
+  
+  <!-- 个人资料头部 -->
+  <view class="profile-header">
+    <view class="profile-avatar">
+      <text class="avatar-icon">👤</text>
+    </view>
+    <view class="text-xl font-medium text-center">用户昵称</view>
+  </view>
+  
+  <!-- 内容区域 -->
+  <view class="p-4 pb-20">
+    <!-- 个人资料卡片 -->
+    <view class="profile-card">
+      <view class="text-base font-medium mb-2">个人资料</view>
+      
+      <view class="profile-item">
+        <view class="profile-item-icon">
+          <text>📍</text>
+        </view>
+        <view class="flex-1">
+          <view class="text-sm text-gray-500">所在城市</view>
+          <view class="font-medium">北京市</view>
+        </view>
+        <view class="edit-btn" bindtap="editCity">修改</view>
+      </view>
+      
+      <view class="profile-item">
+        <view class="profile-item-icon">
+          <text>⚥</text>
+        </view>
+        <view class="flex-1">
+          <view class="text-sm text-gray-500">性别</view>
+          <view class="font-medium">男生</view>
+        </view>
+        <view class="edit-btn" bindtap="editGender">修改</view>
+      </view>
+      
+      <view class="profile-item">
+        <view class="profile-item-icon">
+          <text>📝</text>
+        </view>
+        <view class="flex-1">
+          <view class="text-sm text-gray-500">个人描述</view>
+          <view class="font-medium">喜欢简约、商务风格，平时经常需要参加正式场合，希望得到合适的穿搭建议。</view>
+        </view>
+        <view class="edit-btn" bindtap="editDescription">修改</view>
+      </view>
+    </view>
+    
+    <!-- 其他选项卡片 -->
+    <view class="profile-card">
+      <view class="profile-item" bindtap="goToHistory">
+        <view class="profile-item-icon">
+          <text>🕒</text>
+        </view>
+        <view class="flex-1">
+          <view class="font-medium">历史记录</view>
+        </view>
+        <view class="text-gray-400">
+          <text class="icon-right">></text>
+        </view>
+      </view>
+      
+      <view class="profile-item" bindtap="goToFavorites">
+        <view class="profile-item-icon">
+          <text>❤️</text>
+        </view>
+        <view class="flex-1">
+          <view class="font-medium">我的收藏</view>
+        </view>
+        <view class="text-gray-400">
+          <text class="icon-right">></text>
+        </view>
+      </view>
+      
+      <view class="profile-item" bindtap="goToSettings">
+        <view class="profile-item-icon">
+          <text>⚙️</text>
+        </view>
+        <view class="flex-1">
+          <view class="font-medium">设置</view>
+        </view>
+        <view class="text-gray-400">
+          <text class="icon-right">></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 底部标签栏 -->
+  <view class="tab-bar">
+    <view class="tab-item" bindtap="navigateToIndex">
+      <text class="icon">👔</text>
+      <view class="text-xs mt-1">OOTD</view>
+    </view>
+    <view class="tab-item active">
+      <text class="icon">👤</text>
+      <view class="text-xs mt-1">我的</view>
+    </view>
+  </view>
+</view> 
