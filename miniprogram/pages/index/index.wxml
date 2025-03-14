@@ -87,4 +87,12 @@
       <view class="tab-text">我的</view>
     </view>
   </view>
+
+  <!-- OOTD弹窗组件 -->
+  <ootd-popup 
+    visible="{{popupVisible}}" 
+    weatherInfo="{{weatherInfo}}" 
+    styleSelected="{{selectedStyleName}}" 
+    bind:close="onPopupClose">
+  </ootd-popup>
 </view>

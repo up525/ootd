@@ -1,0 +1,80 @@
+<!-- components/ootd-popup/ootd-popup.wxml -->
+<view class="popup-mask {{visible ? 'show' : ''}}" bindtap="closePopup">
+  <view class="popup-container" catchtap="stopPropagation">
+    <view class="popup-header">
+      <view class="popup-title">今日穿搭建议</view>
+      <view class="close-btn" bindtap="closePopup">
+        <text>×</text>
+      </view>
+    </view>
+    
+    <view class="popup-body">
+      <!-- 天气信息 -->
+      <view class="weather-info">
+        <view class="weather-icon">
+          <text>{{weatherInfo.icon}}</text>
+        </view>
+        <view>
+          <view class="text-sm font-medium">今天 · {{weatherInfo.city}}</view>
+          <view class="text-xs text-gray-500">{{weatherInfo.condition}} · {{weatherInfo.temp}}°C (体感温度 {{weatherInfo.feelTemp}}°C)</view>
+        </view>
+      </view>
+      
+      <!-- 风格标签 -->
+      <view>
+        <view class="font-medium mb-2">所选风格</view>
+        <view>
+          <view class="style-tag">{{styleSelected}}</view>
+        </view>
+      </view>
+      
+      <!-- 穿搭图库（轮播） -->
+      <view class="outfit-gallery">
+        <view class="outfit-slide {{slides[0].active ? 'active' : ''}}"></view>
+        <view class="outfit-slide {{slides[1].active ? 'active' : ''}}"></view>
+        <view class="outfit-slide {{slides[2].active ? 'active' : ''}}"></view>
+      </view>
+      
+      <!-- 轮播指示器 -->
+      <view class="slide-indicators">
+        <view class="indicator {{slides[0].active ? 'active' : ''}}" bindtap="switchSlide" data-index="0"></view>
+        <view class="indicator {{slides[1].active ? 'active' : ''}}" bindtap="switchSlide" data-index="1"></view>
+        <view class="indicator {{slides[2].active ? 'active' : ''}}" bindtap="switchSlide" data-index="2"></view>
+      </view>
+      
+      <!-- AI穿搭建议 -->
+      <view class="advice-section">
+        <view class="advice-heading">
+          <text class="advice-icon">💡</text> AI穿搭建议
+        </view>
+        <view class="text-sm">
+          <view>考虑到今天北京的低温天气（{{weatherInfo.temp}}°C，体感温度{{weatherInfo.feelTemp}}°C）和您选择的{{styleSelected}}，以下是推荐的穿搭方案：</view>
+          
+          <view class="font-medium mt-2">基础层：</view>
+          <view>- 保暖内衣或轻薄的高领毛衣作为内搭</view>
+          
+          <view class="font-medium mt-2">中间层：</view>
+          <view>- 深灰色或深蓝色的精致羊毛西装外套</view>
+          <view>- 白色或浅蓝色的修身衬衫</view>
+          <view>- 深色西裤（与外套搭配）</view>
+          
+          <view class="font-medium mt-2">外层：</view>
+          <view>- 长款羊绒或羊毛大衣（黑色、海军蓝或深驼色）</view>
+          
+          <view class="font-medium mt-2">配饰：</view>
+          <view>- 纯色羊绒围巾</view>
+          <view>- 皮质手套</view>
+          <view>- 商务皮鞋（最好加绒款）</view>
+          
+          <view class="font-medium mt-2">建议：</view>
+          <view>- 今天温度较低，外出时请务必做好保暖措施</view>
+          <view>- 商务场合建议携带公文包或手提电脑包，增添专业感</view>
+        </view>
+      </view>
+      
+      <!-- 行动按钮 -->
+      <view class="action-btn" bindtap="saveOutfit">收藏此穿搭</view>
+      <view class="action-btn secondary" bindtap="closePopup">返回首页</view>
+    </view>
+  </view>
+</view> 

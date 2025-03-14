@@ -23,7 +23,16 @@ Page({
       { name: '极简主义风', selected: false },
       { name: '工装风', selected: false }
     ],
-    btnScale: 1.0 // 用于按钮动画
+    btnScale: 1.0, // 用于按钮动画
+    popupVisible: false, // 控制弹窗显示
+    selectedStyleName: '商务精英风', // 当前选中的风格名称
+    weatherInfo: {
+      icon: '☀️',
+      city: '北京',
+      temp: '-2',
+      condition: '晴朗',
+      feelTemp: '-5'
+    }
   },
   
   onLoad: function() {
@@ -54,7 +63,8 @@ Page({
     });
     
     this.setData({
-      styleOptions
+      styleOptions,
+      selectedStyleName: this.data.styleOptions[index].name
     });
     
     // 添加选中效果的触觉反馈
@@ -85,21 +95,26 @@ Page({
     wx.showToast({
       title: '正在生成穿搭方案',
       icon: 'loading',
-      duration: 2000
+      duration: 1000
     });
     
     // 获取当前选中的风格
     const selectedStyle = this.data.styleOptions.find(item => item.selected);
     
-    // 实际应用中，这里可以根据天气信息和选择的风格生成穿搭建议
-    // 示例中只是一个简单的延迟弹窗
+    // 延迟显示弹窗（模拟生成过程）
     setTimeout(() => {
-      wx.showModal({
-        title: '今日穿搭建议',
-        content: `根据当前天气状况和您选择的${selectedStyle.name}，建议您穿着保暖大衣、毛衣、长裤和皮鞋，搭配围巾增加保暖和时尚度。`,
-        showCancel: false
+      this.setData({
+        popupVisible: true,
+        selectedStyleName: selectedStyle.name
       });
-    }, 2000);
+    }, 1000);
+  },
+  
+  // 关闭弹窗
+  onPopupClose: function() {
+    this.setData({
+      popupVisible: false
+    });
   },
   
   // 导航到个人资料页面
